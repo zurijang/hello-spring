@@ -12,6 +12,7 @@ public class MemoryMemberRepository implements MemberRepository {
      * Member : 정보(값)담기는 객체
      * 실무에서는 동시성 문제로 공유되는 변수일때는 ConcurrentHashMap 사용
      */
+    // static으로 선언되었기 때문에 new 될때마다 store 공유 가능함
     private static Map<Long, Member> store = new HashMap<>();
     // key 값 0, 1, 2 ... 생성해주는 변수, 실무에서는 long 하는 것보다는 동시성 문제를 고려해서 atomiclong 사용
     private static long sequence = 0L;
