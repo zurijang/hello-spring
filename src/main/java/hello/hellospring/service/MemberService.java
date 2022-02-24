@@ -3,11 +3,14 @@ package hello.hellospring.service;
 import hello.hellospring.domain.Member;
 import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.repository.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 // 클래스에 두고 Ctrl + Shift + T : 해당 클래스의 테스트 클래스 자동 생성
+@Service
 public class MemberService {
 
     //private final MemberRepository memberRepository = new MemoryMemberRepository();
@@ -17,6 +20,7 @@ public class MemberService {
     // 그리고 store 가 static이 아니라고 가정했을 때, 다른 repository를 사용하게 되는 것임 (store 는 repository)
     // 만약, 하나의 repository를 사용하고 싶다면?
     // MemberService 입장에서 외부에서 memberRepository를 넣어줌 -> DI (Dependency Injection)
+    @Autowired
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
