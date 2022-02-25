@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+  <div class="container">
+    <div>
+      <table>
+        <thead>
+        <tr>
+          <th>#</th>
+          <th>이름</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--
+          -- thymeleaf 의 기능
+          -- ${ } : model로 넘겨받은 값 접근
+          -->
+        <tr th:each="member : ${members}"> <!-- forEach와 같음 -->
+          <td th:text="${member.id}"></td> <!-- 객체의 getter로 불러옴, 직접 접근 x -->
+          <td th:text="${member.name}"></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
