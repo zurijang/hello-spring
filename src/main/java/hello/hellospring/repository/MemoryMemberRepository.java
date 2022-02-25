@@ -8,7 +8,7 @@ import java.util.*;
 // Ctrl + N : 클래스 찾아서 파일 전환
 
 // @Repository : 자바 컨테이너가 repository로 관리하도록 하겠다
-@Repository
+// @Repository
 public class MemoryMemberRepository implements MemberRepository {
 
     /*
