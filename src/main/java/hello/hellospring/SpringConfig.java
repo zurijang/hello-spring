@@ -1,13 +1,26 @@
 package hello.hellospring;
 
+import hello.hellospring.repository.JdbcMemberRepository;
 import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.repository.MemoryMemberRepository;
 import hello.hellospring.service.MemberService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.sql.DataSource;
+
 @Configuration
 public class SpringConfig {
+
+    // JdbcMemberRepository로 연동시키기 위함
+    DataSource dataSource;
+
+    // JdbcMemberRepository로 연동시키기 위함
+    @Autowired
+    public SpringConfig(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
     // @Bean : Spring Bean 등록
     // Spring Container를 만들 때, @Configuration 읽고 @Bean 항목을 읽음
@@ -20,7 +33,12 @@ public class SpringConfig {
     // memberService 객체 만들 때 필요한 memberRepository() 도 Spring Bean 설정
     @Bean
     public MemberRepository memberRepository() {
-        return new MemoryMemberRepository();
+        // MemoryMemberRepository() 에서 JdbcMemberRepository() 로 바꿀 때, 기존에 코드를 수정한 것이 없음
+        // 오직 설정파일에서 수정한 것만으로 교체가 가능하다
+
+        //return new MemoryMemberRepository();
+        // JdbcMemberRepository로 연동
+        return new JdbcMemberRepository(dataSource);
     }
 
 
