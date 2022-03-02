@@ -26,11 +26,16 @@ public class SpringConfig {
     //}
 
     // JPA 의존성 주입
-    private EntityManager em;
+    //private EntityManager em;
+
+    // SpringDataJpa
+    private final MemberRepository memberRepository;
 
     @Autowired
-    public SpringConfig(EntityManager em) {
-        this.em = em;
+    public SpringConfig(/*EntityManager em*/ MemberRepository memberRepository) {
+        //this.em = em;
+        // SpringDataJpa
+        this.memberRepository = memberRepository;
     }
 
     // @Bean : Spring Bean 등록
@@ -38,12 +43,15 @@ public class SpringConfig {
     @Bean
     public MemberService memberService() {
         // Ctrl + P : 해당메서드 정보 (매개변수 등) 확인
-        return new MemberService(memberRepository());
+        //return new MemberService(memberRepository());
+
+        // SpringDataJpa
+        return new MemberService(memberRepository);
     }
 
     // memberService 객체 만들 때 필요한 memberRepository() 도 Spring Bean 설정
-    @Bean
-    public MemberRepository memberRepository() {
+//    @Bean
+//    public MemberRepository memberRepository() {
         // MemoryMemberRepository() 에서 JdbcMemberRepository() 로 바꿀 때, 기존에 코드를 수정한 것이 없음
         // 오직 설정파일에서 수정한 것만으로 교체가 가능하다
 
@@ -53,8 +61,9 @@ public class SpringConfig {
         // JdbcTemplateMemberRepository로 연동
         //return new JdbcTemplateMemberRepository(dataSource);
         // JPAMemberRepository 연동
-        return new JpaMemberRepository(em);
-    }
+        //return new JpaMemberRepository(em);
+
+//    }
 
 
 }
