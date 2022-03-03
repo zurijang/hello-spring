@@ -42,11 +42,23 @@ public class MemberService {
             throw new IllegalStateException("이미 존재하는 회원입니다.");
         });*/
 
-        // Ctrl + Alt + Shift + T : 리팩토링 관련된 툴
-        // 코드내용 먼저 작성 후 리팩토링 관련 툴로 Extract Method 사용하면 메서드 분리가능
-        validateDuplicateMember(member);
-        memberRepository.save(member);
-        return member.getId();
+        // 이 방식으로 메서드 호출 시간을 확인할 수 있다.
+        // 하지만 모든 메서드에 이런식으로 적어주면 쉽지않다.
+        // 만약 1000개의 메서드의 호출 시간을 측정해야하는데, 하나하나 입력하려한다면? 야근각..
+        long start = System.currentTimeMillis();
+
+        try {
+
+            // Ctrl + Alt + Shift + T : 리팩토링 관련된 툴
+            // 코드내용 먼저 작성 후 리팩토링 관련 툴로 Extract Method 사용하면 메서드 분리가능
+            validateDuplicateMember(member);
+            memberRepository.save(member);
+            return member.getId();
+        } finally {
+            long finish = System.currentTimeMillis();
+            long timeMs = finish - start;
+            System.out.println("join = " + timeMs + "ms");
+        }
     }
 
     private void validateDuplicateMember(Member member) {
