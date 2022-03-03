@@ -27,6 +27,9 @@ public class MemberController {
     @Autowired
     public MemberController(MemberService memberService) {
         this.memberService = memberService;
+        // AOP 적용하여 스프링 실행되는 것 확인하면 프록시의 memberService를 확인할 수 있음
+        // AOP를 적용한 memberService
+        System.out.println("memberService = " + memberService.getClass());
     }
 
     // GetMapping : URL을 통해 주로 조회할 때

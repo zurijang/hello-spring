@@ -1,5 +1,6 @@
 package hello.hellospring;
 
+import hello.hellospring.aop.TimeTraceAop;
 import hello.hellospring.repository.JdbcMemberRepository;
 import hello.hellospring.repository.JdbcTemplateMemberRepository;
 import hello.hellospring.repository.JpaMemberRepository;
@@ -64,6 +65,12 @@ public class SpringConfig {
         //return new JpaMemberRepository(em);
 
 //    }
+
+    // Bean으로 설정하면 TimeTraceAop에 한 가지를 더해줘야함
+    /*@Bean
+    public TimeTraceAop timeTraceAop() {
+        return new TimeTraceAop();
+    }*/
 
 
 }
